@@ -48,6 +48,9 @@ void MainWindow::on_treeView_2_clicked(const QModelIndex &index) {
 void MainWindow::on_pushButton_clicked() {
     QString filename_resource;
     validations(filename_resource);
+    if (resource_path == (destination_path + "/" + filename_resource)) {
+        return;
+    }
     ifFileExistInDestFolder(filename_resource);
     moveOrCopyFile(destination_path + "/" + filename_resource, false);
 }
@@ -97,9 +100,6 @@ void MainWindow::ifFileExistInDestFolder(QString &filename_resource) {
         return;
     }
     if (QFileInfo::exists(destination_path + "/" + filename_resource)) {
-        if (resource_path == (destination_path + "/" + filename_resource)) {
-            return;
-        }
         QMessageBox msgBox;
         msgBox.setText("Destiny folder has file with the same name");
 
